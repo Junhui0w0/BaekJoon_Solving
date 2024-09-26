@@ -1,2 +1,3 @@
-for i in range(10,-1,-1):
-    print(i)
+lst = [[10,20], [100,200]]
+x,y = lst[0]
+print(x)
