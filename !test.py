@@ -1,3 +1,3 @@
-lst = [10, 2, 3, 100, 50]
-print(sorted(lst)[0])
-print(lst)
+lst = [1,2,3,4]
+lst2 = lst[:]
+print(lst2)
