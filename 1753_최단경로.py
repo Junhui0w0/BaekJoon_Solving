@@ -96,14 +96,14 @@ route_lst = [[] for _ in range(V+1)] #index = 0 ~ V
     # cost를 먼저 삽입하는 이유는 우선순위큐(heapq)에 삽입하는 값의 순서에 따라 우선순위가 달라짐
 
 tmp = []
-# heapq.heappush(tmp, (0, K))
+heapq.heappush(tmp, (0, K))
 
 for _ in range(E):
     start, end, cost = map(int, input().rstrip().split())
     route_lst[start].append((cost, end))
 
-    if start == K:
-        heapq.heappush(tmp, (cost, end))
+    # if start == K:
+    #     heapq.heappush(tmp, (cost, end))
 
 dp_lst = [MAX_V] * (V+1) #index = 0 ~ V
 dp_lst[K] = 0 #자기자신은 0
@@ -119,9 +119,11 @@ while(tmp):
     for next_cost, next_end in route_lst[end]:
         total_cost = cost + next_cost
 
-        if total_cost < dp_lst[next_end]:
-            dp_lst[next_end] = total_cost
-            heapq.heappush(tmp, (total_cost, next_end))
+        if total_cost >= dp_lst[next_end]: #만약 다음으로 진행할 가중치가 기존 가중치보다 값이 크다 -> 그 경로 필요 X
+            continue
+
+        heapq.heappush(tmp, (total_cost, next_end))
+        dp_lst[next_end] = total_cost
 
 for cost in dp_lst[1:]:
     if cost == MAX_V:
