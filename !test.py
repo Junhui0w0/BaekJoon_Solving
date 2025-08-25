@@ -1,3 +1,2 @@
-lst = [1,2,3,4]
-lst2 = lst[:]
-print(lst2)
+lst = [-1] * 10
+print(lst)
